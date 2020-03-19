@@ -23,23 +23,28 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($sql);
         $stmt->bindParam('s', $categoryName);
         $stmt->bindParam('s', $date);
-        // $stmt->execute([$categoryName, $date]);
-        // return $stmt;
-        if ($stmt->execute([$categoryName, $date])) {
-            return true;
-            // header("Location: index.php?cate=created");
-            // $stmt->header("Location: index.php?cate=created");
-            exit();
-        }
-        else {
-            return false;
-            header("Location: index.php?cate=failed");
-            exit();
-        }
+        $stmt->execute([$categoryName, $date]);
+        return $stmt;
+        
+        // header("Location: index.php?cate=created");
+        
+
+    //     if ($stmt->execute([$categoryName, $date])) {
+    //         header("location: index.php?cate=created");
+    //         exit();
+    //    }else {
+    //         header("Location: index.php?cate=failed");            
+    //         exit();
+    //    }
     }
     }
 
 
+    public function redirectOnSubmit() {
+        if (isset($_POST['submit'])) {
+            header("Location: index.php?cate=created");
+        }
+    }
 
 
 

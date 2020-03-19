@@ -4,6 +4,15 @@
     include 'classes/user.class.php';
     include 'classes/viewuser.class.php';
     include 'classes/contr.class.php';
+
+    // function pre($var) {
+	// 	echo '<pre>';
+	// 		print_r($var);
+	// 	echo '</pre>';
+	// }
+
+    ob_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -137,6 +146,9 @@
 <?php
 $cateSet = new UserContr();
 $cateSet->querySetCateTitle();
+
+$redirect = new User();
+$redirect->redirectOnSubmit('created');
 ?>
 
     <div class="modal fade" id="createCategory" tabindex="-1" role="dialog">
