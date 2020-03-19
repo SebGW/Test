@@ -34,6 +34,7 @@
                     <h1 class="pull-left">Opgaver</h1>
                     <div class="pull-right actions">
                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#createCategory">Opret Kategori</a>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategoryForm">Slet Kategori</a>
                     </div>
                 </header>
             </div>
@@ -118,24 +119,16 @@
                         <?php
                             $cateTitle = new UserView();
                             $cateTitle->showCateTitle();
+
+                            $cateSet = new UserContr();
+                            $cateSet->querySetCateTitle();
+
+                            $cateDel = new UserContr();
+                            $cateDel->setdelCateTitle();
+
+                            
                             
                         ?>
-                        <!-- <section>
-                        <div class="header-column">
-                                <header>
-                                    <div class="category" data-time="Today">
-                                        <h2 id="Imorgen" >Projekter</h2>
-                                    </div>
-                                    <a class="add-inline" data-toggle="modal" data-target="#createTask">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </a>
-                                </header>
-                            </div> -->
-                            <!-- <div class="items-column"></div> -->
-                        <!-- </section> -->
-                      
-
-
 
                     </div>
                 </div>
@@ -143,14 +136,12 @@
         </div>
     </div>
 
-<?php
-$cateSet = new UserContr();
-$cateSet->querySetCateTitle();
-
-$redirect = new User();
-$redirect->redirectOnSubmit('created');
-?>
-
+    <?php
+    $redirect = new User();
+    $redirect->redirectOnSubmit();
+    ?>
+    
+    <!-- Tilføje Kategori -->
     <div class="modal fade" id="createCategory" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <form id="createCategoryForm" method="POST">
@@ -168,7 +159,7 @@ $redirect->redirectOnSubmit('created');
                         
                     </div>
                     <div class="modal-footer">
-                    <button type="submit" name="submit" class="btn btn-primary">Opret Kategori</button>
+                    <button type="submit" name="add-submit" class="btn btn-primary">Opret Kategori</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -176,6 +167,35 @@ $redirect->redirectOnSubmit('created');
         </div>
     </div>
 
+    <!-- Slet Kategori -->
+    <div class="modal fade" id="deleteCategoryForm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form id="deleteCategoryForm" method="POST">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Slet Kategori</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                            <div class="form-group">
+                                <label for="categoryName">Navn</label>
+                                <input type="text" name="categoryName" id="categoryName" placeholder="Navn på kategori" class="form-control" />
+                            </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" name="delete-submit" class="btn btn-primary">Slet Kategori</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Modal-box -->
     <div class="modal fade" id="createTask" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <form id="createTaskForm">
@@ -204,6 +224,6 @@ $redirect->redirectOnSubmit('created');
     <script src="Content/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="Content/scripts/bootstrap.min.js"></script>
     <script src="Content/scripts/global.js"></script>
+
 </body>
 </html>
-

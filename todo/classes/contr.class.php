@@ -1,13 +1,15 @@
 <?php
 
-class UserContr extends User{
+class UserContr extends User
+{
 
-public function querySetCateTitle() {
+    public function querySetCateTitle()
+    {
 
-$this->setCateTitle();
+        $this->setCateTitle();
+    }
 
-
-}
-
-
+    public function setdelCateTitle() {
+        $this->delCateTitle();
+    }
 }
